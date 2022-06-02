@@ -29,7 +29,7 @@ public class ConfiguracionRecursos extends ResourceServerConfigurerAdapter{
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 		
-		http.authorizeRequests().antMatchers(HttpMethod.PUT, "/api/**").permitAll().antMatchers(HttpMethod.GET, "/api/**").permitAll().antMatchers(HttpMethod.POST, "/api/**").permitAll()
+		http.authorizeRequests().antMatchers(HttpMethod.OPTIONS, "/api/**").permitAll().antMatchers(HttpMethod.DELETE, "/api/**").permitAll().antMatchers(HttpMethod.PUT, "/api/**").permitAll().antMatchers(HttpMethod.GET, "/api/**").permitAll().antMatchers(HttpMethod.POST, "/api/**").permitAll()
 			.anyRequest().authenticated().and().cors().configurationSource(corsConfigurationSource());
 	}
 	@Bean

@@ -47,7 +47,7 @@ public class ConfigSeguridad extends WebSecurityConfigurerAdapter {
 	@Override
 	public void configure(HttpSecurity http) throws Exception {
 
-		http.authorizeRequests().antMatchers(HttpMethod.GET, "/**").permitAll().antMatchers(HttpMethod.POST, "/**").permitAll().anyRequest().authenticated().and().csrf()
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/**").permitAll().antMatchers(HttpMethod.POST, "/**").permitAll().antMatchers(HttpMethod.PUT, "/**").permitAll().antMatchers(HttpMethod.DELETE, "/**").permitAll().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated().and().csrf()
 				.disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 	}
 

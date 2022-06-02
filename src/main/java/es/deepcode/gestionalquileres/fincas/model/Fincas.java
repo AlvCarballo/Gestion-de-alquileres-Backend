@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * @author aocarballo
  *
@@ -23,52 +25,29 @@ public class Fincas implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty("id")
 	private Long id;
 	@Column(length = 45)
-	private String nombreFinca;
+	@JsonProperty("nombre_finca")
+	private String nombre_finca;
 	/**
 	 * 
 	 */
-	
 	/**
-	 * @return the id
+	 * @param nombre_finca
 	 */
-	public Long getid() {
-		return id;
-	}
-	/**
-	 * @param id the id to set
-	 */
-	public void setid(Long id) {
-		this.id = id;
-	}
-	/**
-	 * @return the nombreFinca
-	 */
-	public String getNombreFinca() {
-		return nombreFinca;
-	}
-	/**
-	 * @param nombreFinca the nombreFinca to set
-	 */
-	public void setNombreFinca(String nombreFinca) {
-		this.nombreFinca = nombreFinca;
+	public Fincas(String nombre_finca) {
+		super();
+		this.nombre_finca = nombre_finca;
 	}
 	/**
 	 * @param id
-	 * @param nombreFinca
+	 * @param nombre_finca
 	 */
-	public Fincas(Long id, String nombreFinca) {
+	public Fincas(Long id, String nombre_finca) {
 		super();
 		this.id = id;
-		this.nombreFinca = nombreFinca;
-	}
-	/**
-	 * @param nombreFinca
-	 */
-	public Fincas(String nombreFinca) {
-		super();
-		this.nombreFinca = nombreFinca;
+		this.nombre_finca = nombre_finca;
 	}
 	/**
 	 * 
@@ -76,5 +55,36 @@ public class Fincas implements Serializable{
 	public Fincas() {
 		super();
 	}
+	/**
+	 * @return the id
+	 */
+	public Long getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+	/**
+	 * @return the nombre_finca
+	 */
+	public String getNombre_finca() {
+		return nombre_finca;
+	}
+	/**
+	 * @param nombre_finca the nombre_finca to set
+	 */
+	public void setNombre_finca(String nombre_finca) {
+		this.nombre_finca = nombre_finca;
+	}
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
+	
 	
 }

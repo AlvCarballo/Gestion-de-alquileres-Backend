@@ -12,10 +12,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import es.deepcode.gestionalquileres.inmuebles.model.Inmuebles;
 import es.deepcode.gestionalquileres.inquilinos.model.Inquilinos;
@@ -34,17 +36,23 @@ public class Recibos implements Serializable{
 	private static final long serialVersionUID = -2061500905734504316L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty("id")
 	private Long id;
-	private Double importeRecibo;
+	@JsonProperty("importe_recibo")
+	private Double importe_recibo;
 	@Column(length = 45)
-	private String conceptoRecibo;
-	private Date fechaRecibo;
+	@JsonProperty("concepto_recibo")
+	private String concepto_recibo;
+	@JsonProperty("fecha_recibo")
+	private Date fecha_recibo;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	@JoinColumn(name="id_inquilino", referencedColumnName="id")
 	private Inquilinos inquilino;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	@JoinColumn(name="id_inmueble", referencedColumnName="id")
 	private Inmuebles inmueble;
 	/**
 	 * 
@@ -53,86 +61,86 @@ public class Recibos implements Serializable{
 		super();
 	}
 	/**
-	 * @param importeRecibo
-	 * @param conceptoRecibo
-	 * @param fechaRecibo
+	 * @param importe_recibo
+	 * @param concepto_recibo
+	 * @param fecha_recibo
 	 * @param inquilino
 	 * @param inmueble
 	 */
-	public Recibos(Double importeRecibo, String conceptoRecibo, Date fechaRecibo, Inquilinos inquilino,
+	public Recibos(Double importe_recibo, String concepto_recibo, Date fecha_recibo, Inquilinos inquilino,
 			Inmuebles inmueble) {
 		super();
-		this.importeRecibo = importeRecibo;
-		this.conceptoRecibo = conceptoRecibo;
-		this.fechaRecibo = fechaRecibo;
+		this.importe_recibo = importe_recibo;
+		this.concepto_recibo = concepto_recibo;
+		this.fecha_recibo = fecha_recibo;
 		this.inquilino = inquilino;
 		this.inmueble = inmueble;
 	}
 	/**
 	 * @param id
-	 * @param importeRecibo
-	 * @param conceptoRecibo
-	 * @param fechaRecibo
+	 * @param importe_recibo
+	 * @param concepto_recibo
+	 * @param fecha_recibo
 	 * @param inquilino
 	 * @param inmueble
 	 */
-	public Recibos(Long id, Double importeRecibo, String conceptoRecibo, Date fechaRecibo, Inquilinos inquilino,
+	public Recibos(Long id, Double importe_recibo, String concepto_recibo, Date fecha_recibo, Inquilinos inquilino,
 			Inmuebles inmueble) {
 		super();
 		this.id = id;
-		this.importeRecibo = importeRecibo;
-		this.conceptoRecibo = conceptoRecibo;
-		this.fechaRecibo = fechaRecibo;
+		this.importe_recibo = importe_recibo;
+		this.concepto_recibo = concepto_recibo;
+		this.fecha_recibo = fecha_recibo;
 		this.inquilino = inquilino;
 		this.inmueble = inmueble;
 	}
 	/**
 	 * @return the id
 	 */
-	public Long getid() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setid(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	/**
-	 * @return the importeRecibo
+	 * @return the importe_recibo
 	 */
-	public Double getImporteRecibo() {
-		return importeRecibo;
+	public Double getImporte_recibo() {
+		return importe_recibo;
 	}
 	/**
-	 * @param importeRecibo the importeRecibo to set
+	 * @param importe_recibo the importe_recibo to set
 	 */
-	public void setImporteRecibo(Double importeRecibo) {
-		this.importeRecibo = importeRecibo;
+	public void setImporte_recibo(Double importe_recibo) {
+		this.importe_recibo = importe_recibo;
 	}
 	/**
-	 * @return the conceptoRecibo
+	 * @return the concepto_recibo
 	 */
-	public String getConceptoRecibo() {
-		return conceptoRecibo;
+	public String getConcepto_recibo() {
+		return concepto_recibo;
 	}
 	/**
-	 * @param conceptoRecibo the conceptoRecibo to set
+	 * @param concepto_recibo the concepto_recibo to set
 	 */
-	public void setConceptoRecibo(String conceptoRecibo) {
-		this.conceptoRecibo = conceptoRecibo;
+	public void setConcepto_recibo(String concepto_recibo) {
+		this.concepto_recibo = concepto_recibo;
 	}
 	/**
-	 * @return the fechaRecibo
+	 * @return the fecha_recibo
 	 */
-	public Date getFechaRecibo() {
-		return fechaRecibo;
+	public Date getFecha_recibo() {
+		return fecha_recibo;
 	}
 	/**
-	 * @param fechaRecibo the fechaRecibo to set
+	 * @param fecha_recibo the fecha_recibo to set
 	 */
-	public void setFechaRecibo(Date fechaRecibo) {
-		this.fechaRecibo = fechaRecibo;
+	public void setFecha_recibo(Date fecha_recibo) {
+		this.fecha_recibo = fecha_recibo;
 	}
 	/**
 	 * @return the inquilino
@@ -157,6 +165,12 @@ public class Recibos implements Serializable{
 	 */
 	public void setInmueble(Inmuebles inmueble) {
 		this.inmueble = inmueble;
+	}
+	/**
+	 * @return the serialversionuid
+	 */
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 }

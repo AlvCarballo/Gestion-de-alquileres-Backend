@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author aocarballo
  *
@@ -26,28 +28,41 @@ public class Inquilinos implements Serializable{
 	private static final long serialVersionUID = -2580139428569705764L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty("id")
 	private Long id;
 	@Column(length = 9)
-	private String dniInquilino;
+	@JsonProperty("dni_inquilino")
+	private String dni_inquilino;
 	@Column(length = 45)
-	private String nombreInquilino;
+	@JsonProperty("nombre_inquilino")
+	private String nombre_inquilino;
 	@Column(length = 90)
-	private String apellidosInquilino;
+	@JsonProperty("apellidos_inquilino")
+	private String apellidos_inquilino;
 	@Column(length = 45)
-	private String tipoViaInquilino;
+	@JsonProperty("tipo_via_inquilino")
+	private String tipo_via_inquilino;
 	@Column(length = 45)
-	private String direccionInquilino;
-	private int numeroInquilino;
+	@JsonProperty("direccion_inquilino")
+	private String direccion_inquilino;
+	@JsonProperty("numero_inquilino")
+	private int numero_inquilino;
 	@Column(length = 45)
-	private String pisoInquilino;
+	@JsonProperty("piso_inquilino")
+	private String piso_inquilino;
 	@Column(length = 4)
-	private String letraInquilino;
+	@JsonProperty("letra_inquilino")
+	private String letra_inquilino;
 	@Column(length = 24)
-	private String ccInquilino;
+	@JsonProperty("cc_inquilino")
+	private String cc_inquilino;
 	@Column(length = 45)
-	private String emailInquilino;
-	private int movilInquilino;
-	private int telefonoInquilino;
+	@JsonProperty("email_inquilino")
+	private String email_inquilino;
+	@JsonProperty("movil_inquilino")
+	private int movil_inquilino;
+	@JsonProperty("telefono_inquilino")
+	private int telefono_inquilino;
 	/**
 	 * 
 	 */
@@ -55,234 +70,226 @@ public class Inquilinos implements Serializable{
 		super();
 	}
 	/**
-	 * @param id
-	 * @param dniInquilino
-	 * @param nombreInquilino
-	 * @param apellidosInquilino
-	 * @param tipoViaInquilino
-	 * @param direccionInquilino
-	 * @param numeroInquilino
-	 * @param pisoInquilino
-	 * @param letraInquilino
-	 * @param ccInquilino
-	 * @param emailInquilino
-	 * @param movilInquilino
-	 * @param telefonoInquilino
+	 * @param dni_inquilino
+	 * @param nombre_inquilino
+	 * @param apellidos_inquilino
+	 * @param tipo_via_inquilino
+	 * @param direccion_inquilino
+	 * @param numero_inquilino
+	 * @param piso_inquilino
+	 * @param letra_inquilino
+	 * @param cc_inquilino
+	 * @param email_inquilino
+	 * @param movil_inquilino
+	 * @param telefono_inquilino
 	 */
-	public Inquilinos(Long id, String dniInquilino, String nombreInquilino, String apellidosInquilino,
-			String tipoViaInquilino, String direccionInquilino, int numeroInquilino, String pisoInquilino,
-			String letraInquilino, String ccInquilino, String emailInquilino, int movilInquilino,
-			int telefonoInquilino) {
+	public Inquilinos(String dni_inquilino, String nombre_inquilino, String apellidos_inquilino,
+			String tipo_via_inquilino, String direccion_inquilino, int numero_inquilino, String piso_inquilino,
+			String letra_inquilino, String cc_inquilino, String email_inquilino, int movil_inquilino,
+			int telefono_inquilino) {
 		super();
-		this.id = id;
-		this.dniInquilino = dniInquilino;
-		this.nombreInquilino = nombreInquilino;
-		this.apellidosInquilino = apellidosInquilino;
-		this.tipoViaInquilino = tipoViaInquilino;
-		this.direccionInquilino = direccionInquilino;
-		this.numeroInquilino = numeroInquilino;
-		this.pisoInquilino = pisoInquilino;
-		this.letraInquilino = letraInquilino;
-		this.ccInquilino = ccInquilino;
-		this.emailInquilino = emailInquilino;
-		this.movilInquilino = movilInquilino;
-		this.telefonoInquilino = telefonoInquilino;
+		this.dni_inquilino = dni_inquilino;
+		this.nombre_inquilino = nombre_inquilino;
+		this.apellidos_inquilino = apellidos_inquilino;
+		this.tipo_via_inquilino = tipo_via_inquilino;
+		this.direccion_inquilino = direccion_inquilino;
+		this.numero_inquilino = numero_inquilino;
+		this.piso_inquilino = piso_inquilino;
+		this.letra_inquilino = letra_inquilino;
+		this.cc_inquilino = cc_inquilino;
+		this.email_inquilino = email_inquilino;
+		this.movil_inquilino = movil_inquilino;
+		this.telefono_inquilino = telefono_inquilino;
 	}
 	/**
-	 * @param dniInquilino
-	 * @param nombreInquilino
-	 * @param apellidosInquilino
-	 * @param tipoViaInquilino
-	 * @param direccionInquilino
-	 * @param numeroInquilino
-	 * @param pisoInquilino
-	 * @param letraInquilino
-	 * @param ccInquilino
-	 * @param emailInquilino
-	 * @param movilInquilino
-	 * @param telefonoInquilino
+	 * @param id
+	 * @param dni_inquilino
+	 * @param nombre_inquilino
+	 * @param apellidos_inquilino
+	 * @param tipo_via_inquilino
+	 * @param direccion_inquilino
+	 * @param numero_inquilino
+	 * @param piso_inquilino
+	 * @param letra_inquilino
+	 * @param cc_inquilino
+	 * @param email_inquilino
+	 * @param movil_inquilino
+	 * @param telefono_inquilino
 	 */
-	public Inquilinos(String dniInquilino, String nombreInquilino, String apellidosInquilino, String tipoViaInquilino,
-			String direccionInquilino, int numeroInquilino, String pisoInquilino, String letraInquilino,
-			String ccInquilino, String emailInquilino, int movilInquilino, int telefonoInquilino) {
+	public Inquilinos(Long id, String dni_inquilino, String nombre_inquilino, String apellidos_inquilino,
+			String tipo_via_inquilino, String direccion_inquilino, int numero_inquilino, String piso_inquilino,
+			String letra_inquilino, String cc_inquilino, String email_inquilino, int movil_inquilino,
+			int telefono_inquilino) {
 		super();
-		this.dniInquilino = dniInquilino;
-		this.nombreInquilino = nombreInquilino;
-		this.apellidosInquilino = apellidosInquilino;
-		this.tipoViaInquilino = tipoViaInquilino;
-		this.direccionInquilino = direccionInquilino;
-		this.numeroInquilino = numeroInquilino;
-		this.pisoInquilino = pisoInquilino;
-		this.letraInquilino = letraInquilino;
-		this.ccInquilino = ccInquilino;
-		this.emailInquilino = emailInquilino;
-		this.movilInquilino = movilInquilino;
-		this.telefonoInquilino = telefonoInquilino;
-	}
-	@Override
-	public String toString() {
-		return "Inquilinos [id=" + id + ", dniInquilino=" + dniInquilino + ", nombreInquilino="
-				+ nombreInquilino + ", apellidosInquilino=" + apellidosInquilino + ", tipoViaInquilino="
-				+ tipoViaInquilino + ", direccionInquilino=" + direccionInquilino + ", numeroInquilino="
-				+ numeroInquilino + ", pisoInquilino=" + pisoInquilino + ", letraInquilino=" + letraInquilino
-				+ ", ccInquilino=" + ccInquilino + ", emailInquilino=" + emailInquilino + ", movilInquilino="
-				+ movilInquilino + ", telefonoInquilino=" + telefonoInquilino + "]";
+		this.id = id;
+		this.dni_inquilino = dni_inquilino;
+		this.nombre_inquilino = nombre_inquilino;
+		this.apellidos_inquilino = apellidos_inquilino;
+		this.tipo_via_inquilino = tipo_via_inquilino;
+		this.direccion_inquilino = direccion_inquilino;
+		this.numero_inquilino = numero_inquilino;
+		this.piso_inquilino = piso_inquilino;
+		this.letra_inquilino = letra_inquilino;
+		this.cc_inquilino = cc_inquilino;
+		this.email_inquilino = email_inquilino;
+		this.movil_inquilino = movil_inquilino;
+		this.telefono_inquilino = telefono_inquilino;
 	}
 	/**
 	 * @return the id
 	 */
-	public Long getid() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setid(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	/**
-	 * @return the dniInquilino
+	 * @return the dni_inquilino
 	 */
-	public String getDniInquilino() {
-		return dniInquilino;
+	public String getDni_inquilino() {
+		return dni_inquilino;
 	}
 	/**
-	 * @param dniInquilino the dniInquilino to set
+	 * @param dni_inquilino the dni_inquilino to set
 	 */
-	public void setDniInquilino(String dniInquilino) {
-		this.dniInquilino = dniInquilino;
+	public void setDni_inquilino(String dni_inquilino) {
+		this.dni_inquilino = dni_inquilino;
 	}
 	/**
-	 * @return the nombreInquilino
+	 * @return the nombre_inquilino
 	 */
-	public String getNombreInquilino() {
-		return nombreInquilino;
+	public String getNombre_inquilino() {
+		return nombre_inquilino;
 	}
 	/**
-	 * @param nombreInquilino the nombreInquilino to set
+	 * @param nombre_inquilino the nombre_inquilino to set
 	 */
-	public void setNombreInquilino(String nombreInquilino) {
-		this.nombreInquilino = nombreInquilino;
+	public void setNombre_inquilino(String nombre_inquilino) {
+		this.nombre_inquilino = nombre_inquilino;
 	}
 	/**
-	 * @return the apellidosInquilino
+	 * @return the apellidos_inquilino
 	 */
-	public String getApellidosInquilino() {
-		return apellidosInquilino;
+	public String getApellidos_inquilino() {
+		return apellidos_inquilino;
 	}
 	/**
-	 * @param apellidosInquilino the apellidosInquilino to set
+	 * @param apellidos_inquilino the apellidos_inquilino to set
 	 */
-	public void setApellidosInquilino(String apellidosInquilino) {
-		this.apellidosInquilino = apellidosInquilino;
+	public void setApellidos_inquilino(String apellidos_inquilino) {
+		this.apellidos_inquilino = apellidos_inquilino;
 	}
 	/**
-	 * @return the tipoViaInquilino
+	 * @return the tipo_via_inquilino
 	 */
-	public String getTipoViaInquilino() {
-		return tipoViaInquilino;
+	public String getTipo_via_inquilino() {
+		return tipo_via_inquilino;
 	}
 	/**
-	 * @param tipoViaInquilino the tipoViaInquilino to set
+	 * @param tipo_via_inquilino the tipo_via_inquilino to set
 	 */
-	public void setTipoViaInquilino(String tipoViaInquilino) {
-		this.tipoViaInquilino = tipoViaInquilino;
+	public void setTipo_via_inquilino(String tipo_via_inquilino) {
+		this.tipo_via_inquilino = tipo_via_inquilino;
 	}
 	/**
-	 * @return the direccionInquilino
+	 * @return the direccion_inquilino
 	 */
-	public String getDireccionInquilino() {
-		return direccionInquilino;
+	public String getDireccion_inquilino() {
+		return direccion_inquilino;
 	}
 	/**
-	 * @param direccionInquilino the direccionInquilino to set
+	 * @param direccion_inquilino the direccion_inquilino to set
 	 */
-	public void setDireccionInquilino(String direccionInquilino) {
-		this.direccionInquilino = direccionInquilino;
+	public void setDireccion_inquilino(String direccion_inquilino) {
+		this.direccion_inquilino = direccion_inquilino;
 	}
 	/**
-	 * @return the numeroInquilino
+	 * @return the numero_inquilino
 	 */
-	public int getNumeroInquilino() {
-		return numeroInquilino;
+	public int getNumero_inquilino() {
+		return numero_inquilino;
 	}
 	/**
-	 * @param numeroInquilino the numeroInquilino to set
+	 * @param numero_inquilino the numero_inquilino to set
 	 */
-	public void setNumeroInquilino(int numeroInquilino) {
-		this.numeroInquilino = numeroInquilino;
+	public void setNumero_inquilino(int numero_inquilino) {
+		this.numero_inquilino = numero_inquilino;
 	}
 	/**
-	 * @return the pisoInquilino
+	 * @return the piso_inquilino
 	 */
-	public String getPisoInquilino() {
-		return pisoInquilino;
+	public String getPiso_inquilino() {
+		return piso_inquilino;
 	}
 	/**
-	 * @param pisoInquilino the pisoInquilino to set
+	 * @param piso_inquilino the piso_inquilino to set
 	 */
-	public void setPisoInquilino(String pisoInquilino) {
-		this.pisoInquilino = pisoInquilino;
+	public void setPiso_inquilino(String piso_inquilino) {
+		this.piso_inquilino = piso_inquilino;
 	}
 	/**
-	 * @return the letraInquilino
+	 * @return the letra_inquilino
 	 */
-	public String getLetraInquilino() {
-		return letraInquilino;
+	public String getLetra_inquilino() {
+		return letra_inquilino;
 	}
 	/**
-	 * @param letraInquilino the letraInquilino to set
+	 * @param letra_inquilino the letra_inquilino to set
 	 */
-	public void setLetraInquilino(String letraInquilino) {
-		this.letraInquilino = letraInquilino;
+	public void setLetra_inquilino(String letra_inquilino) {
+		this.letra_inquilino = letra_inquilino;
 	}
 	/**
-	 * @return the ccInquilino
+	 * @return the cc_inquilino
 	 */
-	public String getCcInquilino() {
-		return ccInquilino;
+	public String getCc_inquilino() {
+		return cc_inquilino;
 	}
 	/**
-	 * @param ccInquilino the ccInquilino to set
+	 * @param cc_inquilino the cc_inquilino to set
 	 */
-	public void setCcInquilino(String ccInquilino) {
-		this.ccInquilino = ccInquilino;
+	public void setCc_inquilino(String cc_inquilino) {
+		this.cc_inquilino = cc_inquilino;
 	}
 	/**
-	 * @return the emailInquilino
+	 * @return the email_inquilino
 	 */
-	public String getEmailInquilino() {
-		return emailInquilino;
+	public String getEmail_inquilino() {
+		return email_inquilino;
 	}
 	/**
-	 * @param emailInquilino the emailInquilino to set
+	 * @param email_inquilino the email_inquilino to set
 	 */
-	public void setEmailInquilino(String emailInquilino) {
-		this.emailInquilino = emailInquilino;
+	public void setEmail_inquilino(String email_inquilino) {
+		this.email_inquilino = email_inquilino;
 	}
 	/**
-	 * @return the movilInquilino
+	 * @return the movil_inquilino
 	 */
-	public int getMovilInquilino() {
-		return movilInquilino;
+	public int getMovil_inquilino() {
+		return movil_inquilino;
 	}
 	/**
-	 * @param movilInquilino the movilInquilino to set
+	 * @param movil_inquilino the movil_inquilino to set
 	 */
-	public void setMovilInquilino(int movilInquilino) {
-		this.movilInquilino = movilInquilino;
+	public void setMovil_inquilino(int movil_inquilino) {
+		this.movil_inquilino = movil_inquilino;
 	}
 	/**
-	 * @return the telefonoInquilino
+	 * @return the telefono_inquilino
 	 */
-	public int getTelefonoInquilino() {
-		return telefonoInquilino;
+	public int getTelefono_inquilino() {
+		return telefono_inquilino;
 	}
 	/**
-	 * @param telefonoInquilino the telefonoInquilino to set
+	 * @param telefono_inquilino the telefono_inquilino to set
 	 */
-	public void setTelefonoInquilino(int telefonoInquilino) {
-		this.telefonoInquilino = telefonoInquilino;
+	public void setTelefono_inquilino(int telefono_inquilino) {
+		this.telefono_inquilino = telefono_inquilino;
 	}
 	/**
 	 * @return the serialversionuid
@@ -290,7 +297,5 @@ public class Inquilinos implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
-	
 	
 }

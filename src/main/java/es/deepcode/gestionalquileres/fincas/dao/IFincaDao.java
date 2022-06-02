@@ -3,7 +3,7 @@
  */
 package es.deepcode.gestionalquileres.fincas.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import es.deepcode.gestionalquileres.fincas.model.Fincas;
 
@@ -12,6 +12,6 @@ import es.deepcode.gestionalquileres.fincas.model.Fincas;
  * @author aocarballo
  *
  */
-public interface IFincaDao extends CrudRepository<Fincas, Long>{
+public interface IFincaDao extends JpaRepository<Fincas, Long>{
 
 }

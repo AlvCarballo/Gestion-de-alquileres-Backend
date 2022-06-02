@@ -3,7 +3,15 @@
  */
 package es.deepcode.gestionalquileres.inquilinos.controllers;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.deepcode.gestionalquileres.inquilinos.model.Inquilinos;
-import es.deepcode.gestionalquileres.inquilinos.response.InquilinoResponseRest;
 import es.deepcode.gestionalquileres.inquilinos.service.IInquilinoService;
 
 /**
@@ -32,30 +39,107 @@ public class InquilinoRestController {
 	private IInquilinoService service;
 	
 	@GetMapping("/inquilinos")
-	public ResponseEntity<InquilinoResponseRest> consultarFinca() {
-		ResponseEntity<InquilinoResponseRest> response = service.buscar();
-		return response;
-				
+	public List<Inquilinos> findAll() {
+		return service.findAll();
+	}
+	@GetMapping("/inquilinos/page/{page}")
+	public Page<Inquilinos> findAll(@PathVariable Integer page) {
+		return service.findAll(PageRequest.of(page, 10));
 	}
 	@GetMapping("/inquilinos/{id}")
-	public ResponseEntity<InquilinoResponseRest> consultarFincaID(@PathVariable Long id) {
-		ResponseEntity<InquilinoResponseRest> response = service.buscarID(id);
-		return response;
-				
+	public ResponseEntity<?> findById(@PathVariable Long id) {
+		Inquilinos inquilino= null;
+		Map<String, Object> response = new HashMap<>();
+		try {
+			inquilino = service.findById(id);
+		} catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar la consulta en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		if(inquilino == null) {
+			response.put("mensaje", "La inquilino ID: ".concat(id.toString().concat(" no existe en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<Inquilinos>(inquilino, HttpStatus.OK);
 	}
+	
 	@PostMapping("/inquilinos")
-	public ResponseEntity<InquilinoResponseRest> crear(@RequestBody Inquilinos request) {
-		ResponseEntity<InquilinoResponseRest> response = service.crear(request);
-		return response;
+	public ResponseEntity<?> save(@RequestBody Inquilinos request) {
+		Inquilinos inquilinoNew= null;
+		Map<String, Object> response = new HashMap<>();
+		try {
+			inquilinoNew = service.save(request);
+		} catch(DataAccessException e) {
+			response.put("mensaje", "Error al realizar el insert en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		response.put("mensaje", "La inquilino ha sido creado con éxito!");
+		response.put("cliente", inquilinoNew);
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+		
 	}
 	@PutMapping("/inquilinos/{id}")
-	public ResponseEntity<InquilinoResponseRest> actualizar(@RequestBody Inquilinos request, @PathVariable Long id) {
-		ResponseEntity<InquilinoResponseRest> response = service.actualizar(request, id);
-		return response;
+	public ResponseEntity<?> update(@RequestBody Inquilinos request, @PathVariable Long id) {
+		Inquilinos inquilinoActual = service.findById(id);
+		Inquilinos inquilinoUpdated = null;
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		if (inquilinoActual == null) {
+			response.put("mensaje", "Error: no se pudo editar, la inquilino ID: "
+					.concat(id.toString().concat(" no existe en la base de datos!")));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.NOT_FOUND);
+		}
+
+		try {
+
+			inquilinoActual.setApellidos_inquilino(request.getApellidos_inquilino());
+			inquilinoActual.setCc_inquilino(request.getCc_inquilino());
+			inquilinoActual.setDireccion_inquilino(request.getDireccion_inquilino());
+			inquilinoActual.setDni_inquilino(request.getDni_inquilino());
+			inquilinoActual.setEmail_inquilino(request.getEmail_inquilino());
+			inquilinoActual.setLetra_inquilino(request.getLetra_inquilino());
+			inquilinoActual.setMovil_inquilino(request.getMovil_inquilino());
+			inquilinoActual.setNombre_inquilino(request.getNombre_inquilino());
+			inquilinoActual.setNumero_inquilino(request.getNumero_inquilino());
+			inquilinoActual.setPiso_inquilino(request.getPiso_inquilino());
+			inquilinoActual.setTelefono_inquilino(request.getTelefono_inquilino());
+			inquilinoActual.setTipo_via_inquilino(request.getTipo_via_inquilino());
+
+			inquilinoUpdated = service.update(request, id);
+
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al actualizar la inquilino en la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+
+		response.put("mensaje", "La inquilino ha sido actualizado con éxito!");
+		response.put("cliente", inquilinoUpdated);
+
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
+		
+		
 	}
 	@DeleteMapping("/inquilinos/{id}")
-	public ResponseEntity<InquilinoResponseRest> eliminar(@PathVariable Long id) {
-		ResponseEntity<InquilinoResponseRest> response = service.eliminar(id);
-		return response;
+	public ResponseEntity<?> delete(@PathVariable Long id) {
+		
+		Map<String, Object> response = new HashMap<>();
+		
+		try {
+		    service.delete(id);
+		} catch (DataAccessException e) {
+			response.put("mensaje", "Error al eliminar el inquilino de la base de datos");
+			response.put("error", e.getMessage().concat(": ").concat(e.getMostSpecificCause().getMessage()));
+			return new ResponseEntity<Map<String, Object>>(response, HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+		
+		response.put("mensaje", "La inquilino ha sido eliminada con éxito!");
+		
+		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.OK);
 	}
 }

@@ -3,19 +3,22 @@
  */
 package es.deepcode.gestionalquileres.recibos.service;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import es.deepcode.gestionalquileres.recibos.model.Recibos;
-import es.deepcode.gestionalquileres.recibos.response.ReciboResponseRest;
 
 /**
  * @author aocarballo
  *
  */
 public interface IReciboService {
-	public ResponseEntity<ReciboResponseRest> buscar();
-	public ResponseEntity<ReciboResponseRest> buscarID(Long id);
-	public ResponseEntity<ReciboResponseRest> crear(Recibos recibo);
-	public ResponseEntity<ReciboResponseRest> actualizar(Recibos recibo, Long id);
-	public ResponseEntity<ReciboResponseRest> eliminar(Long id);
+	public List<Recibos> findAll();
+	public Page<Recibos> findAll(Pageable pageable);
+	public Recibos findById(Long id);
+	public  Recibos save(Recibos recibo);
+	public Recibos update(Recibos recibo, Long id);
+	public void delete(Long id);
 }

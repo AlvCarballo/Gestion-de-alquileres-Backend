@@ -11,10 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import es.deepcode.gestionalquileres.fincas.model.Fincas;
 import es.deepcode.gestionalquileres.inquilinos.model.Inquilinos;
@@ -35,21 +37,32 @@ public class Inmuebles implements Serializable{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty("id")
 	private Long id;
 	@Column(length = 45)
-	private String RefCatastralInmueble;
+	@JsonProperty("ref_catastral_inmueble")
+	private String ref_catastral_inmueble;
 	@Column(length = 45)
-	private String pisoInmueble;
+	@JsonProperty("piso_inmueble")
+	private String piso_inmueble;
 	@Column(length = 3)
-	private String letraInmueble;
+	@JsonProperty("letra_inmueble")
+	private String letra_inmueble;
+	@JsonProperty("precio_inmueble")
+	private double precio_inmueble;
+	@JsonProperty("alquilado_inmueble")
+	private boolean alquilado_inmueble;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	@JoinColumn(name="id_propietario", referencedColumnName="id")
 	private Propietarios propietario;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	@JoinColumn(name="id_finca", referencedColumnName="id")
 	private Fincas finca;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+	@JoinColumn(name="id_inquilino", referencedColumnName="id")
 	private Inquilinos inquilino;
 
 	/**
@@ -60,40 +73,40 @@ public class Inmuebles implements Serializable{
 	}
 
 	/**
-	 * @param id
-	 * @param refCatastralInmueble
-	 * @param pisoInmueble
-	 * @param letraInmueble
+	 * @param ref_catastral_inmueble
+	 * @param piso_inmueble
+	 * @param letra_inmueble
 	 * @param propietario
 	 * @param finca
 	 * @param inquilino
 	 */
-	public Inmuebles(Long id, String refCatastralInmueble, String pisoInmueble, String letraInmueble,
+	public Inmuebles(String ref_catastral_inmueble, String piso_inmueble, String letra_inmueble,
 			Propietarios propietario, Fincas finca, Inquilinos inquilino) {
 		super();
-		this.id = id;
-		RefCatastralInmueble = refCatastralInmueble;
-		this.pisoInmueble = pisoInmueble;
-		this.letraInmueble = letraInmueble;
+		this.ref_catastral_inmueble = ref_catastral_inmueble;
+		this.piso_inmueble = piso_inmueble;
+		this.letra_inmueble = letra_inmueble;
 		this.propietario = propietario;
 		this.finca = finca;
 		this.inquilino = inquilino;
 	}
 
 	/**
-	 * @param refCatastralInmueble
-	 * @param pisoInmueble
-	 * @param letraInmueble
+	 * @param id
+	 * @param ref_catastral_inmueble
+	 * @param piso_inmueble
+	 * @param letra_inmueble
 	 * @param propietario
 	 * @param finca
 	 * @param inquilino
 	 */
-	public Inmuebles(String refCatastralInmueble, String pisoInmueble, String letraInmueble, Propietarios propietario,
-			Fincas finca, Inquilinos inquilino) {
+	public Inmuebles(Long id, String ref_catastral_inmueble, String piso_inmueble, String letra_inmueble,
+			Propietarios propietario, Fincas finca, Inquilinos inquilino) {
 		super();
-		RefCatastralInmueble = refCatastralInmueble;
-		this.pisoInmueble = pisoInmueble;
-		this.letraInmueble = letraInmueble;
+		this.id = id;
+		this.ref_catastral_inmueble = ref_catastral_inmueble;
+		this.piso_inmueble = piso_inmueble;
+		this.letra_inmueble = letra_inmueble;
 		this.propietario = propietario;
 		this.finca = finca;
 		this.inquilino = inquilino;
@@ -102,57 +115,57 @@ public class Inmuebles implements Serializable{
 	/**
 	 * @return the id
 	 */
-	public Long getid() {
+	public Long getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setid(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
 	/**
-	 * @return the refCatastralInmueble
+	 * @return the ref_catastral_inmueble
 	 */
-	public String getRefCatastralInmueble() {
-		return RefCatastralInmueble;
+	public String getRef_catastral_inmueble() {
+		return ref_catastral_inmueble;
 	}
 
 	/**
-	 * @param refCatastralInmueble the refCatastralInmueble to set
+	 * @param ref_catastral_inmueble the ref_catastral_inmueble to set
 	 */
-	public void setRefCatastralInmueble(String refCatastralInmueble) {
-		RefCatastralInmueble = refCatastralInmueble;
+	public void setRef_catastral_inmueble(String ref_catastral_inmueble) {
+		this.ref_catastral_inmueble = ref_catastral_inmueble;
 	}
 
 	/**
-	 * @return the pisoInmueble
+	 * @return the piso_inmueble
 	 */
-	public String getPisoInmueble() {
-		return pisoInmueble;
+	public String getPiso_inmueble() {
+		return piso_inmueble;
 	}
 
 	/**
-	 * @param pisoInmueble the pisoInmueble to set
+	 * @param piso_inmueble the piso_inmueble to set
 	 */
-	public void setPisoInmueble(String pisoInmueble) {
-		this.pisoInmueble = pisoInmueble;
+	public void setPiso_inmueble(String piso_inmueble) {
+		this.piso_inmueble = piso_inmueble;
 	}
 
 	/**
-	 * @return the letraInmueble
+	 * @return the letra_inmueble
 	 */
-	public String getLetraInmueble() {
-		return letraInmueble;
+	public String getLetra_inmueble() {
+		return letra_inmueble;
 	}
 
 	/**
-	 * @param letraInmueble the letraInmueble to set
+	 * @param letra_inmueble the letra_inmueble to set
 	 */
-	public void setLetraInmueble(String letraInmueble) {
-		this.letraInmueble = letraInmueble;
+	public void setLetra_inmueble(String letra_inmueble) {
+		this.letra_inmueble = letra_inmueble;
 	}
 
 	/**
@@ -196,6 +209,33 @@ public class Inmuebles implements Serializable{
 	public void setInquilino(Inquilinos inquilino) {
 		this.inquilino = inquilino;
 	}
-	
+
+	/**
+	 * @return the precio_inmueble
+	 */
+	public double getPrecio_inmueble() {
+		return precio_inmueble;
+	}
+
+	/**
+	 * @param precio_inmueble the precio_inmueble to set
+	 */
+	public void setPrecio_inmueble(double precio_inmueble) {
+		this.precio_inmueble = precio_inmueble;
+	}
+
+	/**
+	 * @return the alquilado_inmueble
+	 */
+	public boolean isAlquilado_inmueble() {
+		return alquilado_inmueble;
+	}
+
+	/**
+	 * @param alquilado_inmueble the alquilado_inmueble to set
+	 */
+	public void setAlquilado_inmueble(boolean alquilado_inmueble) {
+		this.alquilado_inmueble = alquilado_inmueble;
+	}
 	
 }

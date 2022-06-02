@@ -3,19 +3,23 @@
  */
 package es.deepcode.gestionalquileres.fincas.service;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import es.deepcode.gestionalquileres.fincas.model.Fincas;
-import es.deepcode.gestionalquileres.fincas.response.FincaResponseRest;
 
 /**
  * @author aocarballo
  *
  */
 public interface IFincaService {
-	public ResponseEntity<FincaResponseRest> buscar();
-	public ResponseEntity<FincaResponseRest> buscarID(Long id);
-	public ResponseEntity<FincaResponseRest> crear(Fincas finca);
-	public ResponseEntity<FincaResponseRest> actualizar(Fincas finca, Long id);
-	public ResponseEntity<FincaResponseRest> eliminar(Long id);
+	
+	public List<Fincas> findAll();
+	public Page<Fincas> findAll(Pageable pageable);
+	public Fincas findById(Long id);
+	public  Fincas save(Fincas finca);
+	public Fincas update(Fincas finca, Long id);
+	public void delete(Long id);
 }

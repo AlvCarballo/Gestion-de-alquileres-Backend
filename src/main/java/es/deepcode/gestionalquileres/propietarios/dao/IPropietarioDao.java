@@ -3,7 +3,7 @@
  */
 package es.deepcode.gestionalquileres.propietarios.dao;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import es.deepcode.gestionalquileres.propietarios.model.Propietarios;
 
@@ -11,6 +11,6 @@ import es.deepcode.gestionalquileres.propietarios.model.Propietarios;
  * @author aocarballo
  *
  */
-public interface IPropietarioDao extends CrudRepository<Propietarios, Long>{
+public interface IPropietarioDao extends JpaRepository<Propietarios, Long>{
 
 }

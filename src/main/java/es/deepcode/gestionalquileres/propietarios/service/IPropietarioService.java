@@ -3,19 +3,22 @@
  */
 package es.deepcode.gestionalquileres.propietarios.service;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import es.deepcode.gestionalquileres.propietarios.model.Propietarios;
-import es.deepcode.gestionalquileres.propietarios.response.PropietarioResponseRest;
 
 /**
  * @author aocarballo
  *
  */
 public interface IPropietarioService {
-	public ResponseEntity<PropietarioResponseRest> buscar();
-	public ResponseEntity<PropietarioResponseRest> buscarID(Long id);
-	public ResponseEntity<PropietarioResponseRest> crear(Propietarios propietario);
-	public ResponseEntity<PropietarioResponseRest> actualizar(Propietarios propietario, Long id);
-	public ResponseEntity<PropietarioResponseRest> eliminar(Long id);
+	public List<Propietarios> findAll();
+	public Page<Propietarios> findAll(Pageable pageable);
+	public Propietarios findById(Long id);
+	public  Propietarios save(Propietarios propietario);
+	public Propietarios update(Propietarios propietario, Long id);
+	public void delete(Long id);
 }

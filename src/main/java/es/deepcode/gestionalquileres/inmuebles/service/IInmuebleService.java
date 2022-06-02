@@ -3,10 +3,12 @@
  */
 package es.deepcode.gestionalquileres.inmuebles.service;
 
-import org.springframework.http.ResponseEntity;
+import java.util.List;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import es.deepcode.gestionalquileres.inmuebles.model.Inmuebles;
-import es.deepcode.gestionalquileres.inmuebles.response.InmuebleResponseRest;
 
 /**
  * @author aocarballo
@@ -14,9 +16,10 @@ import es.deepcode.gestionalquileres.inmuebles.response.InmuebleResponseRest;
  */
 public interface IInmuebleService {
 	
-	public ResponseEntity<InmuebleResponseRest> buscar();
-	public ResponseEntity<InmuebleResponseRest> buscarID(Long id);
-	public ResponseEntity<InmuebleResponseRest> crear(Inmuebles inmueble);
-	public ResponseEntity<InmuebleResponseRest> actualizar(Inmuebles inmueble, Long id);
-	public ResponseEntity<InmuebleResponseRest> eliminar(Long id);
+	public List<Inmuebles> findAll();
+	public Page<Inmuebles> findAll(Pageable pageable);
+	public Inmuebles findById(Long id);
+	public  Inmuebles save(Inmuebles inmueble);
+	public Inmuebles update(Inmuebles inmueble, Long id);
+	public void delete(Long id);
 }

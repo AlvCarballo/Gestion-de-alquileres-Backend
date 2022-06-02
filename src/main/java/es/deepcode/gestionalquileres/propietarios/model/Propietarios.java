@@ -12,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * @author aocarballo
  *
@@ -26,29 +28,43 @@ public class Propietarios implements Serializable{
 	private static final long serialVersionUID = 6096468201195133435L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@JsonProperty("id")
 	private Long id;
-	private Boolean tipoPersonaPropietario;
+	@JsonProperty("tipo_persona_propietario")
+	private Boolean tipo_persona_propietario;
 	@Column(length = 9)
-	private String dniPropietario;
+	@JsonProperty("dni_propietario")
+	private String dni_propietario;
 	@Column(length = 45)
-	private String nombrePropietario;
+	@JsonProperty("nombre_propietario")
+	private String nombre_propietario;
 	@Column(length = 90)
-	private String apellidosPropietario;
+	@JsonProperty("apellidos_propietario")
+	private String apellidos_propietario;
 	@Column(length = 45)
-	private String tipoViaPropietario;
+	@JsonProperty("tipo_via_propietario")
+	private String tipo_via_propietario;
 	@Column(length = 45)
-	private String direccionPropietario;
-	private int numeroPropietario;
+	@JsonProperty("direccion_propietario")
+	private String direccion_propietario;
+	@JsonProperty("numero_propietario")
+	private int numero_propietario;
 	@Column(length = 45)
-	private String pisoPropietario;
+	@JsonProperty("piso_propietario")
+	private String piso_propietario;
 	@Column(length = 4)
-	private String letraPropietario;
+	@JsonProperty("letra_propietario")
+	private String letra_propietario;
 	@Column(length = 24)
-	private String ccPropietario;
+	@JsonProperty("cc_propietario")
+	private String cc_propietario;
 	@Column(length = 45)
-	private String emailPropietario;
-	private int movilPropietario;
-	private int telefonoPropietario;
+	@JsonProperty("email_propietario")
+	private String email_propietario;
+	@JsonProperty("movil_propietario")
+	private int movil_propietario;
+	@JsonProperty("telefono_propietario")
+	private int telefono_propietario;
 	/**
 	 * 
 	 */
@@ -56,252 +72,242 @@ public class Propietarios implements Serializable{
 		super();
 	}
 	/**
-	 * @param id
-	 * @param tipoPersonaPropietario
-	 * @param dniPropietario
-	 * @param nombrePropietario
-	 * @param apellidosPropietario
-	 * @param tipoViaPropietario
-	 * @param direccionPropietario
-	 * @param numeroPropietario
-	 * @param pisoPropietario
-	 * @param letraPropietario
-	 * @param ccPropietario
-	 * @param emailPropietario
-	 * @param movilPropietario
-	 * @param telefonoPropietario
+	 * @param tipo_persona_propietario
+	 * @param dni_propietario
+	 * @param nombre_propietario
+	 * @param apellidos_propietario
+	 * @param tipo_via_propietario
+	 * @param direccion_propietario
+	 * @param numero_propietario
+	 * @param piso_propietario
+	 * @param letra_propietario
+	 * @param cc_propietario
+	 * @param email_propietario
+	 * @param movil_propietario
+	 * @param telefono_propietario
 	 */
-	public Propietarios(Long id, Boolean tipoPersonaPropietario, String dniPropietario,
-			String nombrePropietario, String apellidosPropietario, String tipoViaPropietario,
-			String direccionPropietario, int numeroPropietario, String pisoPropietario, String letraPropietario,
-			String ccPropietario, String emailPropietario, int movilPropietario, int telefonoPropietario) {
+	public Propietarios(Boolean tipo_persona_propietario, String dni_propietario, String nombre_propietario,
+			String apellidos_propietario, String tipo_via_propietario, String direccion_propietario,
+			int numero_propietario, String piso_propietario, String letra_propietario, String cc_propietario,
+			String email_propietario, int movil_propietario, int telefono_propietario) {
 		super();
-		this.id = id;
-		this.tipoPersonaPropietario = tipoPersonaPropietario;
-		this.dniPropietario = dniPropietario;
-		this.nombrePropietario = nombrePropietario;
-		this.apellidosPropietario = apellidosPropietario;
-		this.tipoViaPropietario = tipoViaPropietario;
-		this.direccionPropietario = direccionPropietario;
-		this.numeroPropietario = numeroPropietario;
-		this.pisoPropietario = pisoPropietario;
-		this.letraPropietario = letraPropietario;
-		this.ccPropietario = ccPropietario;
-		this.emailPropietario = emailPropietario;
-		this.movilPropietario = movilPropietario;
-		this.telefonoPropietario = telefonoPropietario;
+		this.tipo_persona_propietario = tipo_persona_propietario;
+		this.dni_propietario = dni_propietario;
+		this.nombre_propietario = nombre_propietario;
+		this.apellidos_propietario = apellidos_propietario;
+		this.tipo_via_propietario = tipo_via_propietario;
+		this.direccion_propietario = direccion_propietario;
+		this.numero_propietario = numero_propietario;
+		this.piso_propietario = piso_propietario;
+		this.letra_propietario = letra_propietario;
+		this.cc_propietario = cc_propietario;
+		this.email_propietario = email_propietario;
+		this.movil_propietario = movil_propietario;
+		this.telefono_propietario = telefono_propietario;
 	}
 	/**
-	 * @param tipoPersonaPropietario
-	 * @param dniPropietario
-	 * @param nombrePropietario
-	 * @param apellidosPropietario
-	 * @param tipoViaPropietario
-	 * @param direccionPropietario
-	 * @param numeroPropietario
-	 * @param pisoPropietario
-	 * @param letraPropietario
-	 * @param ccPropietario
-	 * @param emailPropietario
-	 * @param movilPropietario
-	 * @param telefonoPropietario
+	 * @param id
+	 * @param tipo_persona_propietario
+	 * @param dni_propietario
+	 * @param nombre_propietario
+	 * @param apellidos_propietario
+	 * @param tipo_via_propietario
+	 * @param direccion_propietario
+	 * @param numero_propietario
+	 * @param piso_propietario
+	 * @param letra_propietario
+	 * @param cc_propietario
+	 * @param email_propietario
+	 * @param movil_propietario
+	 * @param telefono_propietario
 	 */
-	public Propietarios(Boolean tipoPersonaPropietario, String dniPropietario, String nombrePropietario,
-			String apellidosPropietario, String tipoViaPropietario, String direccionPropietario, int numeroPropietario,
-			String pisoPropietario, String letraPropietario, String ccPropietario, String emailPropietario,
-			int movilPropietario, int telefonoPropietario) {
+	public Propietarios(Long id, Boolean tipo_persona_propietario, String dni_propietario, String nombre_propietario,
+			String apellidos_propietario, String tipo_via_propietario, String direccion_propietario,
+			int numero_propietario, String piso_propietario, String letra_propietario, String cc_propietario,
+			String email_propietario, int movil_propietario, int telefono_propietario) {
 		super();
-		this.tipoPersonaPropietario = tipoPersonaPropietario;
-		this.dniPropietario = dniPropietario;
-		this.nombrePropietario = nombrePropietario;
-		this.apellidosPropietario = apellidosPropietario;
-		this.tipoViaPropietario = tipoViaPropietario;
-		this.direccionPropietario = direccionPropietario;
-		this.numeroPropietario = numeroPropietario;
-		this.pisoPropietario = pisoPropietario;
-		this.letraPropietario = letraPropietario;
-		this.ccPropietario = ccPropietario;
-		this.emailPropietario = emailPropietario;
-		this.movilPropietario = movilPropietario;
-		this.telefonoPropietario = telefonoPropietario;
-	}
-	@Override
-	public String toString() {
-		return "Propietarios [id=" + id + ", tipoPersonaPropietario=" + tipoPersonaPropietario
-				+ ", dniPropietario=" + dniPropietario + ", nombrePropietario=" + nombrePropietario
-				+ ", apellidosPropietario=" + apellidosPropietario + ", tipoViaPropietario=" + tipoViaPropietario
-				+ ", direccionPropietario=" + direccionPropietario + ", numeroPropietario=" + numeroPropietario
-				+ ", pisoPropietario=" + pisoPropietario + ", letraPropietario=" + letraPropietario + ", ccPropietario="
-				+ ccPropietario + ", emailPropietario=" + emailPropietario + ", movilPropietario=" + movilPropietario
-				+ ", telefonoPropietario=" + telefonoPropietario + "]";
+		this.id = id;
+		this.tipo_persona_propietario = tipo_persona_propietario;
+		this.dni_propietario = dni_propietario;
+		this.nombre_propietario = nombre_propietario;
+		this.apellidos_propietario = apellidos_propietario;
+		this.tipo_via_propietario = tipo_via_propietario;
+		this.direccion_propietario = direccion_propietario;
+		this.numero_propietario = numero_propietario;
+		this.piso_propietario = piso_propietario;
+		this.letra_propietario = letra_propietario;
+		this.cc_propietario = cc_propietario;
+		this.email_propietario = email_propietario;
+		this.movil_propietario = movil_propietario;
+		this.telefono_propietario = telefono_propietario;
 	}
 	/**
 	 * @return the id
 	 */
-	public Long getid() {
+	public Long getId() {
 		return id;
 	}
 	/**
 	 * @param id the id to set
 	 */
-	public void setid(Long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	/**
-	 * @return the tipoPersonaPropietario
+	 * @return the tipo_persona_propietario
 	 */
-	public Boolean getTipoPersonaPropietario() {
-		return tipoPersonaPropietario;
+	public Boolean getTipo_persona_propietario() {
+		return tipo_persona_propietario;
 	}
 	/**
-	 * @param tipoPersonaPropietario the tipoPersonaPropietario to set
+	 * @param tipo_persona_propietario the tipo_persona_propietario to set
 	 */
-	public void setTipoPersonaPropietario(Boolean tipoPersonaPropietario) {
-		this.tipoPersonaPropietario = tipoPersonaPropietario;
+	public void setTipo_persona_propietario(Boolean tipo_persona_propietario) {
+		this.tipo_persona_propietario = tipo_persona_propietario;
 	}
 	/**
-	 * @return the dniPropietario
+	 * @return the dni_propietario
 	 */
-	public String getDniPropietario() {
-		return dniPropietario;
+	public String getDni_propietario() {
+		return dni_propietario;
 	}
 	/**
-	 * @param dniPropietario the dniPropietario to set
+	 * @param dni_propietario the dni_propietario to set
 	 */
-	public void setDniPropietario(String dniPropietario) {
-		this.dniPropietario = dniPropietario;
+	public void setDni_propietario(String dni_propietario) {
+		this.dni_propietario = dni_propietario;
 	}
 	/**
-	 * @return the nombrePropietario
+	 * @return the nombre_propietario
 	 */
-	public String getNombrePropietario() {
-		return nombrePropietario;
+	public String getNombre_propietario() {
+		return nombre_propietario;
 	}
 	/**
-	 * @param nombrePropietario the nombrePropietario to set
+	 * @param nombre_propietario the nombre_propietario to set
 	 */
-	public void setNombrePropietario(String nombrePropietario) {
-		this.nombrePropietario = nombrePropietario;
+	public void setNombre_propietario(String nombre_propietario) {
+		this.nombre_propietario = nombre_propietario;
 	}
 	/**
-	 * @return the apellidosPropietario
+	 * @return the apellidos_propietario
 	 */
-	public String getApellidosPropietario() {
-		return apellidosPropietario;
+	public String getApellidos_propietario() {
+		return apellidos_propietario;
 	}
 	/**
-	 * @param apellidosPropietario the apellidosPropietario to set
+	 * @param apellidos_propietario the apellidos_propietario to set
 	 */
-	public void setApellidosPropietario(String apellidosPropietario) {
-		this.apellidosPropietario = apellidosPropietario;
+	public void setApellidos_propietario(String apellidos_propietario) {
+		this.apellidos_propietario = apellidos_propietario;
 	}
 	/**
-	 * @return the tipoViaPropietario
+	 * @return the tipo_via_propietario
 	 */
-	public String getTipoViaPropietario() {
-		return tipoViaPropietario;
+	public String getTipo_via_propietario() {
+		return tipo_via_propietario;
 	}
 	/**
-	 * @param tipoViaPropietario the tipoViaPropietario to set
+	 * @param tipo_via_propietario the tipo_via_propietario to set
 	 */
-	public void setTipoViaPropietario(String tipoViaPropietario) {
-		this.tipoViaPropietario = tipoViaPropietario;
+	public void setTipo_via_propietario(String tipo_via_propietario) {
+		this.tipo_via_propietario = tipo_via_propietario;
 	}
 	/**
-	 * @return the direccionPropietario
+	 * @return the direccion_propietario
 	 */
-	public String getDireccionPropietario() {
-		return direccionPropietario;
+	public String getDireccion_propietario() {
+		return direccion_propietario;
 	}
 	/**
-	 * @param direccionPropietario the direccionPropietario to set
+	 * @param direccion_propietario the direccion_propietario to set
 	 */
-	public void setDireccionPropietario(String direccionPropietario) {
-		this.direccionPropietario = direccionPropietario;
+	public void setDireccion_propietario(String direccion_propietario) {
+		this.direccion_propietario = direccion_propietario;
 	}
 	/**
-	 * @return the numeroPropietario
+	 * @return the numero_propietario
 	 */
-	public int getNumeroPropietario() {
-		return numeroPropietario;
+	public int getNumero_propietario() {
+		return numero_propietario;
 	}
 	/**
-	 * @param numeroPropietario the numeroPropietario to set
+	 * @param numero_propietario the numero_propietario to set
 	 */
-	public void setNumeroPropietario(int numeroPropietario) {
-		this.numeroPropietario = numeroPropietario;
+	public void setNumero_propietario(int numero_propietario) {
+		this.numero_propietario = numero_propietario;
 	}
 	/**
-	 * @return the pisoPropietario
+	 * @return the piso_propietario
 	 */
-	public String getPisoPropietario() {
-		return pisoPropietario;
+	public String getPiso_propietario() {
+		return piso_propietario;
 	}
 	/**
-	 * @param pisoPropietario the pisoPropietario to set
+	 * @param piso_propietario the piso_propietario to set
 	 */
-	public void setPisoPropietario(String pisoPropietario) {
-		this.pisoPropietario = pisoPropietario;
+	public void setPiso_propietario(String piso_propietario) {
+		this.piso_propietario = piso_propietario;
 	}
 	/**
-	 * @return the letraPropietario
+	 * @return the letra_propietario
 	 */
-	public String getLetraPropietario() {
-		return letraPropietario;
+	public String getLetra_propietario() {
+		return letra_propietario;
 	}
 	/**
-	 * @param letraPropietario the letraPropietario to set
+	 * @param letra_propietario the letra_propietario to set
 	 */
-	public void setLetraPropietario(String letraPropietario) {
-		this.letraPropietario = letraPropietario;
+	public void setLetra_propietario(String letra_propietario) {
+		this.letra_propietario = letra_propietario;
 	}
 	/**
-	 * @return the ccPropietario
+	 * @return the cc_propietario
 	 */
-	public String getCcPropietario() {
-		return ccPropietario;
+	public String getCc_propietario() {
+		return cc_propietario;
 	}
 	/**
-	 * @param ccPropietario the ccPropietario to set
+	 * @param cc_propietario the cc_propietario to set
 	 */
-	public void setCcPropietario(String ccPropietario) {
-		this.ccPropietario = ccPropietario;
+	public void setCc_propietario(String cc_propietario) {
+		this.cc_propietario = cc_propietario;
 	}
 	/**
-	 * @return the emailPropietario
+	 * @return the email_propietario
 	 */
-	public String getEmailPropietario() {
-		return emailPropietario;
+	public String getEmail_propietario() {
+		return email_propietario;
 	}
 	/**
-	 * @param emailPropietario the emailPropietario to set
+	 * @param email_propietario the email_propietario to set
 	 */
-	public void setEmailPropietario(String emailPropietario) {
-		this.emailPropietario = emailPropietario;
+	public void setEmail_propietario(String email_propietario) {
+		this.email_propietario = email_propietario;
 	}
 	/**
-	 * @return the movilPropietario
+	 * @return the movil_propietario
 	 */
-	public int getMovilPropietario() {
-		return movilPropietario;
+	public int getMovil_propietario() {
+		return movil_propietario;
 	}
 	/**
-	 * @param movilPropietario the movilPropietario to set
+	 * @param movil_propietario the movil_propietario to set
 	 */
-	public void setMovilPropietario(int movilPropietario) {
-		this.movilPropietario = movilPropietario;
+	public void setMovil_propietario(int movil_propietario) {
+		this.movil_propietario = movil_propietario;
 	}
 	/**
-	 * @return the telefonoPropietario
+	 * @return the telefono_propietario
 	 */
-	public int getTelefonoPropietario() {
-		return telefonoPropietario;
+	public int getTelefono_propietario() {
+		return telefono_propietario;
 	}
 	/**
-	 * @param telefonoPropietario the telefonoPropietario to set
+	 * @param telefono_propietario the telefono_propietario to set
 	 */
-	public void setTelefonoPropietario(int telefonoPropietario) {
-		this.telefonoPropietario = telefonoPropietario;
+	public void setTelefono_propietario(int telefono_propietario) {
+		this.telefono_propietario = telefono_propietario;
 	}
 	/**
 	 * @return the serialversionuid
