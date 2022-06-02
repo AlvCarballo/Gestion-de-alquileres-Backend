@@ -4,14 +4,12 @@
 package es.deepcode.gestionalquileres.usuarios.service;
 
 
-import org.springframework.http.ResponseEntity;
-
-import es.deepcode.gestionalquileres.usuarios.response.UsuarioResponseRest;
+import es.deepcode.gestionalquileres.usuarios.model.Usuarios;
 
 /**
  * @author aocarballo
  *
  */
 public interface IUsuarioService {
-	public ResponseEntity<UsuarioResponseRest> buscarUsuarios();
+	public Usuarios findByUsername(String username);
 }

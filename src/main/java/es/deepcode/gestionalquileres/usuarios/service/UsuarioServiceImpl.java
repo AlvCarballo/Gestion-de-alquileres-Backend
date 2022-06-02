@@ -28,7 +28,7 @@ import es.deepcode.gestionalquileres.usuarios.model.Usuarios;
  *
  */
 @Service
-public class UsuarioServiceImpl implements UserDetailsService{
+public class UsuarioServiceImpl implements UserDetailsService, IUsuarioService{
 	private static final Logger log = LoggerFactory.getLogger(UsuarioServiceImpl.class);
 	@Autowired
 	private IUsuarioDao usuarioDao;
@@ -47,6 +47,11 @@ public class UsuarioServiceImpl implements UserDetailsService{
 				.peek(authority -> log.info("Role: "+ authority.getAuthority()))
 				.collect(Collectors.toList());
 		return new User(usuario.getNombreUsuario(), usuario.getPwdUsuario(), usuario.getUsuarioHabilitado(), true, true, true, authorities);
+	}
+	@Override
+	public Usuarios findByUsername(String username) {
+		// TODO Auto-generated method stub
+		return usuarioDao.findByNombreUsuario(username);
 	}
 	
 }

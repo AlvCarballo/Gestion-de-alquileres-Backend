@@ -3,6 +3,8 @@
  */
 package es.deepcode.gestionalquileres.auth;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +16,7 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
@@ -32,16 +35,19 @@ public class ServidorAutorizacion extends AuthorizationServerConfigurerAdapter{
 	@Qualifier("authenticationManager")
 	private AuthenticationManager authenticationManager;
 
+	@Autowired
+	private InfoAdicionalToken infoAdicionalToken;
+	
 	@Override
 	public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-		
+		//Configuramos los permisos
 		security.tokenKeyAccess("permitAll()")
 		.checkTokenAccess("isAuthenticated()");
 	}
 
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		
+		//Autorizamos a las aplicaciones creando un token
 		clients.inMemory().withClient("clienterest")
 		.secret(passwordEncoder.encode("1234"))
 		.scopes("read", "write")
@@ -52,10 +58,13 @@ public class ServidorAutorizacion extends AuthorizationServerConfigurerAdapter{
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
+		TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
+		tokenEnhancerChain.setTokenEnhancers(Arrays.asList(infoAdicionalToken, accessTokenConverter()));
 		
 		endpoints.authenticationManager(authenticationManager)
 		.tokenStore(tokenStore())
-		.accessTokenConverter(accessTokenConverter());
+		.accessTokenConverter(accessTokenConverter())
+		.tokenEnhancer(tokenEnhancerChain);
 	}
 
 	@Bean
@@ -67,6 +76,10 @@ public class ServidorAutorizacion extends AuthorizationServerConfigurerAdapter{
 	@Bean
 	public JwtAccessTokenConverter accessTokenConverter() {
 		JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+		//jwtAccessTokenConverter.setSigningKey(JwtConfig.LLAVE_SECRETA);
+
+		jwtAccessTokenConverter.setSigningKey(JwtConfig.RSA_PRIVADA);
+		jwtAccessTokenConverter.setVerifierKey(JwtConfig.RSA_PUBLICA);
 		return jwtAccessTokenConverter;
 	}
 }
