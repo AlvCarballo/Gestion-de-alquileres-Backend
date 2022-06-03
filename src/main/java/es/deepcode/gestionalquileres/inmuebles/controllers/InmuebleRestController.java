@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.deepcode.gestionalquileres.inmuebles.model.Inmuebles;
@@ -32,23 +32,25 @@ import es.deepcode.gestionalquileres.inmuebles.service.IInmuebleService;
  * @author aocarballo
  *
  */
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.HEAD})
 public class InmuebleRestController {
 	
 	
 	@Autowired
 	private IInmuebleService service;
-	
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@GetMapping("/inmuebles")
 	public List<Inmuebles> findAll() {
 		return service.findAll();
 	}
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@GetMapping("/inmuebles/page/{page}")
 	public Page<Inmuebles> findAll(@PathVariable Integer page) {
 		return service.findAll(PageRequest.of(page, 10));
 	}
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@GetMapping("/inmuebles/{id}")
 	public ResponseEntity<?> findById(@PathVariable Long id) {
 		Inmuebles inmueble= null;
@@ -67,7 +69,7 @@ public class InmuebleRestController {
 		}
 		return new ResponseEntity<Inmuebles>(inmueble, HttpStatus.OK);
 	}
-	
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@PostMapping("/inmuebles")
 	public ResponseEntity<?> save(@RequestBody Inmuebles request) {
 		Inmuebles inmuebleNew= null;
@@ -85,6 +87,7 @@ public class InmuebleRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		
 	}
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@PutMapping("/inmuebles/{id}")
 	public ResponseEntity<?> update(@RequestBody Inmuebles request, @PathVariable Long id) {
 		Inmuebles inmuebleActual = service.findById(id);
@@ -124,6 +127,7 @@ public class InmuebleRestController {
 		
 		
 	}
+	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping("/inmuebles/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.deepcode.gestionalquileres.propietarios.model.Propietarios;
@@ -31,22 +31,23 @@ import es.deepcode.gestionalquileres.propietarios.service.IPropietarioService;
  * @author aocarballo
  *
  */
+@CrossOrigin(origins = { "http://localhost:4200" })
 @RestController
 @RequestMapping("/api")
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.PUT, RequestMethod.DELETE, RequestMethod.HEAD})
 public class PropietarioRestController {
 	@Autowired
 	private IPropietarioService service;
-	
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@GetMapping("/propietarios")
 	public List<Propietarios> findAll() {
 		return service.findAll();
 	}
-
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@GetMapping("/propietarios/page/{page}")
 	public Page<Propietarios> findAll(@PathVariable Integer page) {
 		return service.findAll(PageRequest.of(page, 10));
 	}
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@GetMapping("/propietarios/{id}")
 	public ResponseEntity<?> findById(@PathVariable Long id) {
 		Propietarios propietario= null;
@@ -65,7 +66,7 @@ public class PropietarioRestController {
 		}
 		return new ResponseEntity<Propietarios>(propietario, HttpStatus.OK);
 	}
-	
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@PostMapping("/propietarios")
 	public ResponseEntity<?> save(@RequestBody Propietarios request) {
 		Propietarios propietarioNew= null;
@@ -83,6 +84,7 @@ public class PropietarioRestController {
 		return new ResponseEntity<Map<String, Object>>(response, HttpStatus.CREATED);
 		
 	}
+	@Secured({"ROLE_USER","ROLE_ADMIN"})
 	@PutMapping("/propietarios/{id}")
 	public ResponseEntity<?> update(@RequestBody Propietarios request, @PathVariable Long id) {
 		Propietarios propietarioActual = service.findById(id);
@@ -126,6 +128,7 @@ public class PropietarioRestController {
 		
 		
 	}
+	@Secured({"ROLE_ADMIN"})
 	@DeleteMapping("/propietarios/{id}")
 	public ResponseEntity<?> delete(@PathVariable Long id) {
 		

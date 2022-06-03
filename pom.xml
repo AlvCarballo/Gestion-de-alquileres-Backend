@@ -10,9 +10,9 @@
 	</parent>
 
 	<groupId>es.deepcode.gestionalquleres</groupId>
-	<artifactId>GestionAlquileresV2</artifactId>
+	<artifactId>GestionAlquileresV3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>GestionAlquileresV2</name>
+	<name>GestionAlquileresV3</name>
 	<description>Demo project for Spring Boot</description>
 
 	<properties>
